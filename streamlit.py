@@ -78,7 +78,7 @@ if user_input:
 
         # Call the function to get completion
         completion=get_completion(prompt, result, openai)
-        
+        exec(st.code(completion))  
         # def execute_plot_code(code):
         #     try:
         #         # Execute the dynamically generated code
@@ -86,7 +86,7 @@ if user_input:
         #     except Exception as e:
         #         st.error(f"Failed to execute the generated plot code: {str(e)}")
                 
-         exec(st.code(completion))  
+        
         # execute_plot_code(completion)
         
             
