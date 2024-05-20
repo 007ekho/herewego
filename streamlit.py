@@ -73,8 +73,8 @@ if user_input:
         st.pyplot(fig)
     with tabs[3]:
         data_dict = result.to_dict()
-        prompt = """ given this details {data_dict} generate a complete python  code using matplotlib to provide the best visualization for this details. 
-        please output the plot code in a way that is executable """
+        prompt = """ Given this details {data_dict}, generate a complete Python code using Streamlit to provide the best visualization for these details.
+                     Please output the plot code in a way that is executable. """
 
         # Call the function to get completion
         completion=get_completion(prompt, result, openai)
