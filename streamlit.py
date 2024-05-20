@@ -76,6 +76,7 @@ if user_input:
     
             # Call the function to get completion
             completion=get_completion(prompt, result, openai)
+            st.write(completion)
 
         #     with open("dynamic_script.py", "w") as file:
         #         file.write(completion)
