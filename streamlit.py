@@ -76,6 +76,7 @@ if user_input:
         completion=get_completion(prompt, result, openai)
         
         st.write(completion)
+        st.rerun()
         
 
 
