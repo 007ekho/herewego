@@ -1,4 +1,4 @@
-ecimport os
+import os
 import openai
 import streamlit as st
 from pathlib import Path
