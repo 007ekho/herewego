@@ -79,6 +79,8 @@ if user_input:
 
             with open("dynamic_script.py", "w") as file:
                 file.write(completion)
+
+            print("File written successfully")
                 
             st.session_state.code_ready = True
             st.rerun()
