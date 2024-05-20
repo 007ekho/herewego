@@ -78,6 +78,7 @@ if user_input:
     
             # Call the function to get completion
             completion=get_completion(prompt, result, openai)
+            st.write(completion)
             plot_data(completion)
             
 
