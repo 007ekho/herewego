@@ -26,6 +26,7 @@ OPENAI_API_KEY=st.secrets.OPENAI_API_KEY
 
 #create front end
 st.title("CHAT WITH YOUR SNOWFLAKE DATABASE")
+st.session_state.code_ready = False
 user_input = st.text_input("enter your question here")
 tab_title = ["result","Query","plot","test"]
 tabs = st.tabs(tab_title)
@@ -69,17 +70,16 @@ if user_input:
         ax.bar(labels, values)
         st.pyplot(fig)
     with tabs[3]:
-        data_dict = result.to_dict()
-        prompt = "given this details {data_dict} generate a complete python  code using matplotlib and seaborn to provide the best visualization for  this details"
-
-        # Call the function to get completion
-        completion=get_completion(prompt, result, openai)
-        
-        st.write(completion)
-        st.rerun()
-        
-
-
+        if not st.session_state.code_ready:
+            data_dict = result.to_dict()
+            prompt = "given this details {data_dict} generate a complete python  code using matplotlib and seaborn to provide the best visualization for  this details"
+    
+            # Call the function to get completion
+            completion=get_completion(prompt, result, openai)
+    
+            st.session_state.code_ready = True
+            st.write(completion)
+            st.rerun()
 
         # llm = OpenAI(temperature=0)
         # template = """give this answer {result_list} write a statment to address the question {user_input}"""
