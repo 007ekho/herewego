@@ -76,10 +76,15 @@ if user_input:
     
             # Call the function to get completion
             completion=get_completion(prompt, result, openai)
-    
+
+            with open("dynamic_script.py", "w") as file:
+                file.write(completion)
+                
             st.session_state.code_ready = True
-            st.write(exec(completion))
             st.rerun()
+        else:
+            result = subprocess.run(["python", "dynamic_script.py"], capture_output=True, text=True)
+            st.write(result.stdout)
 
         # llm = OpenAI(temperature=0)
         # template = """give this answer {result_list} write a statment to address the question {user_input}"""
