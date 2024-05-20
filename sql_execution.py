@@ -90,6 +90,31 @@ def get_completion(prompt, data_frame, openai, model="gpt-3.5-turbo"):
 
     return res
 
+
+def plot_data(data):
+    # Example of plotting function that decides what plot to make based on data
+    plot_type = data.get('plot_type')
+    df = pd.DataFrame(data['data'])
+
+    if plot_type == 'line':
+        plt.figure()
+        plt.plot(df['x'], df['y'], label='Line plot')
+        plt.legend()
+    elif plot_type == 'bar':
+        plt.figure()
+        plt.bar(df['x'], df['y'], label='Bar chart')
+        plt.legend()
+    elif plot_type == 'scatter':
+        plt.figure()
+        plt.scatter(df['x'], df['y'], label='Scatter plot')
+        plt.legend()
+    # More plot types can be added here
+    plt.title(data.get('title', 'Generated Plot'))
+    plt.xlabel(data.get('xlabel', 'X-Axis'))
+    plt.ylabel(data.get('ylabel', 'Y-Axis'))
+    plt.grid(True)
+    st.pyplot(plt)
+
 if __name__ == "__main__":
     # Snowflake query
     query = '''
