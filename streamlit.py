@@ -72,15 +72,23 @@ if user_input:
         ax.bar(labels, values)
         st.pyplot(fig)
     with tabs[3]:
-        if not st.session_state.code_ready:
-            data_dict = result.to_dict()
-            prompt = """ given this details {data_dict} generate a complete python  code using matplotlib to provide the best visualization for this details. 
-            please output the plot code in a way that is executable """
-    
-            # Call the function to get completion
-            completion=get_completion(prompt, result, openai)
-            st.write(completion)
-            plot_data(completion)
+        data_dict = result.to_dict()
+        prompt = """ given this details {data_dict} generate a complete python  code using matplotlib to provide the best visualization for this details. 
+        please output the plot code in a way that is executable """
+
+        # Call the function to get completion
+        completion=get_completion(prompt, result, openai)
+        
+        def execute_plot_code(code):
+            try:
+                # Execute the dynamically generated code
+                exec(code, globals())
+            except Exception as e:
+                st.error(f"Failed to execute the generated plot code: {str(e)}")
+                
+        st.code(completion)      
+        execute_plot_code(completion)
+        
             
 
         #     with open("dynamic_script.py", "w") as file:
