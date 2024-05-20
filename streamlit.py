@@ -1,4 +1,4 @@
-import os
+ecimport os
 import openai
 import streamlit as st
 from pathlib import Path
@@ -78,7 +78,7 @@ if user_input:
             completion=get_completion(prompt, result, openai)
     
             st.session_state.code_ready = True
-            st.write(completion)
+            st.write(exec(completion))
             st.rerun()
 
         # llm = OpenAI(temperature=0)
