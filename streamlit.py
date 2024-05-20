@@ -74,7 +74,8 @@ if user_input:
     with tabs[3]:
         if not st.session_state.code_ready:
             data_dict = result.to_dict()
-            prompt = "given this details {data_dict} generate a complete python  code using matplotlib and seaborn to provide the best visualization for  this details"
+            prompt = """ given this details {data_dict} generate a complete python  code using matplotlib to provide the best visualization for this details. 
+            please output the plot code in a way that is executable """
     
             # Call the function to get completion
             completion=get_completion(prompt, result, openai)
